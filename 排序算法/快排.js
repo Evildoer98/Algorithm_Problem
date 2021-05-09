@@ -31,56 +31,60 @@
  */
 
 
-let quickSort = (arr) => {
-    quick(arr, 0, arr.length - 1)
-}
-
-let qucik = (arr,left, right) => {
+ let quickSort = (arr) => {
+    quick(arr, 0 , arr.length - 1)
+  }
+  
+  let quick = (arr, left, right) => {
     let index
-    if (left < right) {
-        // 划分数组
-        index = partition(arr, left, right)
-        if (left < index -1) {
-            quick(arr, left, index-1)
-        }
-        if (index < right) {
-            quick(arr, index, right)
-        }
+    if(left < right) {
+      // 划分数组
+      index = partition(arr, left, right)
+      if(left < index - 1) {
+        quick(arr, left, index - 1)
+      }
+      if(index < right) {
+        quick(arr, index, right)
+      }
     }
-}
-
-let partition = (arr, left, right) => {
-    // 取基准
-    var mark = arr[Math.floor(Math.random() * (right - left + 1)) + left]
-    var i = left
-    var j = right
-    // 调整位置
-    while (i <= j) {
-        // 左指针右移
-        while (arr[i] < mark) {
-            i++
-        }
-        // 右指针左移
-        while (arr[i] > mark) {
-            j++
-        }
-        // 交换
-        if (i <= j) {
-            swap(arr, i, j)
-            i += 1
-            j -= 1
-        }
+  }
+  
+  // 一次快排
+  let partition = (arr, left, right) => {
+    // 取中间项为基准
+    var mark = arr[Math.floor(Math.random() * (right - left + 1)) + left],
+        i = left,
+        j = right
+    // 开始调整
+    while(i <= j) {
+      
+      // 左指针右移
+      while(arr[i] < mark) {
+        i++
+      }
+      
+      // 右指针左移
+      while(arr[j] > mark) {
+        j--
+      }
+      
+      // 交换
+      if(i <= j) {
+        swap(arr, i, j)
+        i += 1
+        j -= 1
+      }
     }
     return i
-}
-
-// 交换
-let swap = (arr, i, j) => {
-    let temp = arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp
-}
-
+  }
+  
+  // 交换
+  let swap = (arr, i , j) => {
+      let temp = arr[i]
+      arr[i] = arr[j]
+      arr[j] = temp
+  }
+  
 // 测试
 let arr = [1, 5, 3, 2, 10, 8, 6, 0]
 quickSort(arr)
@@ -101,6 +105,7 @@ var quickSort2 = function (arr) {
         return arr
     }
     var mark = Math.floor(arr.length / 2)
+    // 取出该数，在原数组中删除这个数，防止在排序的时候出现重复
     var pivot = arr.splice(mark, 1)[0]
     var right = []
     var left = []
@@ -111,5 +116,9 @@ var quickSort2 = function (arr) {
             right.push(arr[i])
         }
     }
-    return quickSort2(left).concat([pivot], qucikSort2(right))
+    return quickSort2(left).concat([pivot], quickSort2(right))
 }
+
+var arr1 = [10, 56, 43, 12, 45, 90, 34, 23, 28, 41, 40]
+console.log(quickSort2(arr1))
+
