@@ -44,6 +44,16 @@ var merge2 = function (nums1, nums2) {
 console.log(merge2(nums1, nums2)) // [1, 2, 2, 3, 5, 6]
 
 // 法三
+/**
+ * nums1 、 nums2 有序，若把 nums2 全部合并到 nums1 ，则合并后的 nums1 长度为 m+n
+ * 我们可以从下标 m+n-1 的位置填充 nums1 ，比较 nums1[len1] 与 nums2[len2] 的大小，将最大值写入 nums1[len]，即
+ *      nums1[len1]>=nums2[len2] ，nums1[len--] = nums1[len1--] ,这里 -- 是因为写入成功后，下标自动建议，继续往前比较
+ *      否则 nums1[len--] = nums2[len2--]
+ * 边界条件：
+ *  若 len1 < 0 ，即 len2 >= 0 ，此时 nums1 已重写入， nums2 还未合并完，仅仅需要将 nums2 的剩余元素（0…len）写入 nums2 即可，写入后，合并完成
+ *  若 len2 < 0，此时 nums2 已全部合并到 nums1 ，合并完成
+ * 
+ */
 var merge3 = function (nums1, m, nums2, n) {
     let len1 = m - 1
     let len2 = n - 1
@@ -90,8 +100,5 @@ var merge3 = function (nums1, nums2) {
 }
 console.log(merge3(nums1, nums2));
 
-// 法五
-/**
- * 归并排序
- */
+
 

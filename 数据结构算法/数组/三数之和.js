@@ -1,55 +1,69 @@
 /**
-*  
-*  一个包含n个整数的数组nums，判断nums是否存在三个元素a，b，c，使得a+b+c = 0？ 请找出所有满足条件且不重复的三元组
-*  eg： nums = [-1, 0, 1, 2, -1, -4]
-*  [
-*  [-1,0,1]
-*  [-1,-1,2]
-*  ] 
-*
-*/
-
-// 排序+双指针（注意重复项）
-const threeSum = function(nums){
+ *  
+ *  一个包含n个整数的数组nums，判断nums是否存在三个元素a，b，c，使得a+b+c = 0？ 请找出所有满足条件且不重复的三元组
+ *  注意：答案中不可以包含重复的三元组
+ * eg： nums = [-1, 0, 1, 2, -1, -4]
+ *  [
+ *  [-1,0,1]
+ *  [-1,-1,2]
+ *  ] 
+ *
+ */
+// 排序 + 双指针
+/**
+ * 利用 两数之和
+ * 利用双指针夹逼
+ *  1. 排序，利用排序好的数组，固定一个指针 i ，夹逼选举 left 和 right
+ *  
+ */
+var threeSum1 = function (nums) {
     const len = nums.length
-    var res = []
+    const result = []
+    // nums 至少要大于三个
     if (len < 3) {
-        return res
+        return result
     }
+    // sort 使用 Chrome 的排序是快排，时间复杂度为 O(nlogn)
     nums.sort((a, b) => a - b)
-    if (nums[0] > 0 || nums[len-1] < 0) {
-        return res
+    // 如果第一个大于 0 ，三个加起来肯定大于 0
+    if (nums[0] > 0) {
+        return result
     }
-    for (let i = 0; i < len; i++) {
-        // 防止排序后的数组中有重复的元素，影响结果，如果有重复元素直接跳出本次循环，进入下次循环
-        if (i && nums[i] === nums[i-1]) {
+    // 小于三个就不用考虑了
+    for (let i = 0; i < len - 2; i++) {
+        // 避免重复的情况
+        if (i && nums[i] === nums[i - 1]) {
             continue
         }
-        var left = i + 1
-        var right = len - 1
+        let left = i + 1
+        let right = len - 1
+        // 双指针夹逼
         while (left < right) {
-            var sum = nums[i] + nums[right] + nums[left]
+            const sum = nums[i] + nums[left] + nums[right]
             if (sum === 0) {
-                res.push([nums[i], nums[left], nums[right]])
+                // result.push([nums[i], nums[left++], nums[right--]])
+                result.push([nums[i], nums[left], nums[right]])
                 left++
                 right--
-                while (nums[left] === nums[left-1]) {
-                left++
+                // push 加了之后防止还存在重复
+                while (nums[left] === nums[left - 1]) {
+                    left++
                 }
-                while (nums[right] === nums[right+1]) {
+                while (nums[right] === right[right + 1]) {
                     right--
                 }
-            }else if (sum > 0) {
+            } else if (sum > 0) {
                 right--
-            }else {
+            } else {
                 left++
             }
         }
     }
-    return res
+    return result
 }
-
 var nums = [-1, 0, 1, 2, -1, -4]
 var nums2 = [-1, 0, -1, -2, 1, 4]
-console.log(threeSum(nums));
-console.log(threeSum(nums2));
+
+console.log(threeSum1(nums));
+console.log(threeSum1(nums2));
+
