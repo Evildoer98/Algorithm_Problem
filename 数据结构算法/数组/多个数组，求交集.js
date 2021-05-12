@@ -6,6 +6,24 @@
 // Map 时间复杂度 O(n)
 
 var intersection = function (nums1, nums2) {
+    let arr1 = Array.from(new Set(nums1))
+    let arr2 = Array.from(new Set(nums2))
+    let arr3 = new Array()
+    for(let [v, k] of arr1.entries()) {
+        if (arr2.includes(k)) {
+            arr3.push(k)
+        }
+    }
+    return arr3
+}
+
+var intersection1 = (...arrs) => {
+    return Array.from(new Set(arrs.reduce((total, arr) => {
+        return arr.filter(item => total.includes(item))
+    })))
+}
+
+var intersection2 = function (nums1, nums2) {
     const map = {}, ans = []
     nums1.forEach(item => {
         map[item] = true
@@ -18,7 +36,7 @@ var intersection = function (nums1, nums2) {
     return ans
 }
 
-var intersection = function (nums1, nums2) {
+var intersection3 = function (nums1, nums2) {
     let map1 = new Set(nums1)
     let map2 = new Set(nums2)
     let res = []
@@ -31,7 +49,7 @@ var intersection = function (nums1, nums2) {
 }
 
 // 找交集
-function intersection (arr1, arr2) {
+var intersection4 = function  (arr1, arr2) {
     var has = {}, _intersection = []
     for(let ele of arr1) {
         if (!hash.hasOwnProperty(ele)) {
