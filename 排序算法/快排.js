@@ -121,4 +121,3 @@ var quickSort2 = function (arr) {
 
 var arr1 = [10, 56, 43, 12, 45, 90, 34, 23, 28, 41, 40]
 console.log(quickSort2(arr1))
-

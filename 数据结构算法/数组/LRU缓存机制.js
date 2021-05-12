@@ -22,6 +22,7 @@
  * 
  */
 
+// 法一
 //  基础解法：数组+对象实现
 //  类 vue keep-alive 实现
 var LRUCache = function (capacity) {
@@ -72,9 +73,10 @@ function removeCache (cache, keys, key) {
     remove(keys, key)
 }
 
-// 进阶 使用Map
-// 利用 Map 既能保存键值对，并且能够记住键的原始插入顺序
 
+// 法二
+//  进阶 使用Map
+//  利用 Map 既能保存键值对，并且能够记住键的原始插入顺序
 var LRUCache = function (capacity) {
     this.capacity = capacity
     this.cache = new Map()
@@ -101,4 +103,28 @@ LRUCache.prototype.put = function (key, value) {
         this.cache.delete(this.cache.keys().next().value)
     }
     this.cache.set(key, value)
+}
+function URL(max) {
+    this.max = max
+    this.cache = new Map()
+}
+LRU.prototype = {
+    get (key) {
+        const { cache } = this
+        value = cache.get(key)
+        if (!value) {
+            return -1
+        }
+        cache.delete(key)
+        cache.set(key, value)
+        return value
+    },
+    add (key, value) {
+        const { cache } = this
+        if (cache.size > this.max - 1) {
+            const keys = cache.keys().next().value
+            cache.delete(keys)
+        }
+        cache.set(key, value)
+    }
 }
