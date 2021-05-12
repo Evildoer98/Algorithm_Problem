@@ -1,3 +1,8 @@
+/**
+ * 计算多个数组的交集
+ * 要求：输出结果中的每个元素一定是唯一的
+ */
+
 // Map 时间复杂度 O(n)
 
 var intersection = function (nums1, nums2) {
