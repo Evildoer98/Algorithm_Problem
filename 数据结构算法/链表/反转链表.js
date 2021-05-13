@@ -24,7 +24,7 @@ var f1 = function (head) {
     let curNode = head.next
     // 链表反向后原来的有就变成了尾巴
     // 相当于 head.pre = null
-    let preNode = null
+    preNode.pre = null
     while (curNode.next) {
         // 建立反向联系
         curNode.pre = preNode
