@@ -16,6 +16,7 @@
  *  在头部时，节点的 pre 属性为 null
  *  到尾部时，节点的 next 属性为 null
  */
+
 var f1 = function (head) {
     if (head.next === null) {
         return head
