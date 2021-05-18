@@ -17,13 +17,12 @@
  *  minStack.getMin() ---> -2
  */
 
-class MinStack {
+class MinStack1 {
     constructor () {
         this.length = 0
         this.content = []
         this.mins = []
     }
-
     push (val) {
         const curMin = this.mins[this.length - 1] !== undefined ? this.mins[this.length - 1] : Infinity
         this.content[this.length - 1] = val
@@ -39,3 +38,40 @@ class MinStack {
         return this.mins[this.length - 1]
     }
 }
+
+// 法二：
+/**
+ * 时间复杂度：进栈O(1)，出栈O(n)，获取栈顶元素O(1)，获取最小元素O(1)
+ * 空间复杂度：O(n)
+ */
+
+var MinStack2 = function () {
+    this.items = []
+    this.min = null
+}
+// 进栈
+MinStack2.prototype.push = function (x) {
+    if (!this.items.length) {
+        this.min = x
+    }
+    this.min = Math.min(x, this.min)
+    this.items.push(x)
+}
+// 出栈
+MinStack2.prototype.pop = function () {
+    let num = this.items.pop()
+    this.min = Math.min(...this.items)
+    return num
+}
+// 获取栈顶元素
+MinStack2.prototype.top = function () {
+    if (!this.items.length) {
+        return null
+    }
+    return this.items[this.items.length - 1]
+}
+// 检索栈中的最小元素
+MinStack2.prototype.getMin = function () {
+    return this.min
+}
+
