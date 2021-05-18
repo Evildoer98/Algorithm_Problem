@@ -43,13 +43,14 @@ var f1 = function (s, k) {
     let stack = []
     for (const c of s) {
         let pre = stack.pop()
+        console.log(pre);
         if (!pre || pre[0] !== c) {
             stack.push(pre)
+            // console.log(stack);
             stack.push(c)
-            console.log(stack);
+            // console.log(stack);
         } else if (pre.length < k-1) {
             stack.push(pre+c)
-            
         }
     }
     return stack.join('')
