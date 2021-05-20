@@ -17,7 +17,7 @@
  *      3
  *  输出：[3, 2, 1]
  */
-const f1 = function (root) {
+const postOrderTraversal = function (root) {
     let list = []
     let inOrder = function (node) {
         if (!node) {
@@ -30,7 +30,7 @@ const f1 = function (root) {
     return list
 }
 
-const f2 = function (root) {
+const postOrderTraversalUnRecur = function (root) {
     let list = []
     if (root !== undefined) {
         let s1 = []
