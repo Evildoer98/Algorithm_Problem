@@ -54,7 +54,11 @@ const preOrderTraversal = (root) => {
     return list
 }
 
-// 先访问根节点，再访问左节点，最后访问右节点。
+// 法二：递归
+/**
+ * 先访问根节点，再访问左节点，最后访问右节点。
+ */
+
 const preOrderTraverse = (root) => {
     let list = []
     const preOrder = (node) => {
@@ -71,7 +75,7 @@ const preOrderTraverse = (root) => {
     return list
 }
  
-// 非递归
+// 法三：非递归（迭代）
 const preOrderTraverseUnRecur = (root) => {
     let list = []
     let stack = [root]
@@ -81,6 +85,7 @@ const preOrderTraverseUnRecur = (root) => {
         const right = curNode.right
         // 第一步的时候，先访问的是根节点
         list.push(curNode.val)
+        // 遍历左子树、右子树，因为栈是先入后出，所以，我们先右子树，然后左子树入栈
         if (right) {
             stack.push(right)
         }

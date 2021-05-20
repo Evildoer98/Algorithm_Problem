@@ -17,3 +17,33 @@
  *        3
  * 输出 [1, 3, 2]
  */
+// 法一：递归
+var inOrderTraverse  = function (root) {
+    var list = []
+    let inOrder = function (node) {
+        if (node !== null) {
+            inOrder(node.left)
+            list.push(node.val)
+            inOrder(node.right)
+        }
+    }
+    inOrder(root)
+    return list
+}
+
+// 法二：非递归（迭代）
+const inOrderTraverseUnRecur  = function (root) {
+    var list = []
+    let stack = []
+    let node = root
+    while (node || stack.length) {
+        while (node) {
+            stack.push(node)
+            node = node.left
+        }
+        node = stack.pop()
+        list.push(node.val)
+        node = node.right
+    }
+    return list
+}
