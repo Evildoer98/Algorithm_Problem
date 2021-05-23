@@ -30,8 +30,7 @@
  * 
  */
 
-
- let quickSort = (arr) => {
+  let quickSort = (arr) => {
     quick(arr, 0 , arr.length - 1)
   }
   
